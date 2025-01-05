@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "final project logistics"
+version = "0.1.0"
+description = ""
+authors = ["vladimir smirnov"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+numpy = "^2.1.3"
+pandas = "^2.2.3"
+geopandas = "^1.0.1"
+matplotlib = "^3.9.3"
+folium = "^0.18.0"
+pyarrow = "^18.1.0"
+scikit-learn = "^1.6.0"
+scipy = "^1.14.1"
+selenium = "^4.27.1"
+fastapi = {extras = ["standard"], version = "^0.115.6"}
+loguru = "^0.7.3"
+uvicorn = "^0.34.0"
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

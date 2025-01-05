@@ -1,0 +1,14 @@
+# Request in fastapi
+
+{
+  "name": "Viladecans",
+  "num_stops": 13,
+  "path": "data/russia_cities.geojson"
+}
+
+# Docker commands
+
+docker-compose build
+docker-compose up --build
+
+# Kubernetes
