@@ -10,7 +10,7 @@ from app.optimizer.optimizer import ant_colony_optimization
 from app.visualizer.plots import plot_on_map
 from loguru import logger
 from fastapi import APIRouter
-
+from app.context_manager.app_lifespan import interactive_maps, requests
 
 builder_router = APIRouter()
 
@@ -26,9 +26,9 @@ async def build_route(request: RouteRequest) -> RouteResponse:
     location = (np.mean([center[0] for center in centers]), np.mean([center[1] for center in centers]))
     result = ant_colony_optimization(centers, n_ants=10, n_iterations=1000, alpha=1, beta=1, evaporation_rate=0.5, Q=1)
     logger.info(f"Optimized for best bus route in {request.name}")
-    result_map = plot_on_map(df, centers=centers, best_path=result[0], zoom_start=3, location=location)
+    interactive_maps["map"] = plot_on_map(df, centers=centers, best_path=result[0], zoom_start=3, location=location)
     logger.info(f"Obtained the map for {request.name}")
-    map_creator(input_map=result_map, name=request.name)
+    map_creator(input_map=interactive_maps["map"], name=request.name)
     return RouteResponse( 
         name = request.name,
         num_stops = request.num_stops,

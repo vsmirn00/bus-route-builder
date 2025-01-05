@@ -1,3 +1,8 @@
+# Run locally on reload
+
+uvicorn app.main:app --reload
+
+
 # Request in fastapi
 
 {

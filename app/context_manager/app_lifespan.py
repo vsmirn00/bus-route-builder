@@ -1,6 +1,9 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI # type: ignore
 from loguru import logger # type: ignore
+
+interactive_maps = {}
+requests = {}
  
 @asynccontextmanager
 async def lifespan(app: FastAPI):
