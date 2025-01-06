@@ -1,5 +1,3 @@
-import io
-from PIL import Image
 import numpy as np
 from app.http_model.response import RouteResponse
 from app.http_model.request import RouteRequest
@@ -10,7 +8,7 @@ from app.optimizer.optimizer import ant_colony_optimization
 from app.visualizer.plots import plot_on_map
 from loguru import logger
 from fastapi import APIRouter
-from app.context_manager.app_lifespan import interactive_maps, requests
+from app.context_manager.app_lifespan import interactive_maps
 
 builder_router = APIRouter()
 
