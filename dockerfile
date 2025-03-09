@@ -1,13 +1,12 @@
 FROM python:3.10
 
-# Install necessary dependencies for running Selenium with Firefox
 RUN apt-get update && apt-get install -y \
     firefox-esr \
     wget \
     unzip \
     && apt-get clean
 
-# Install Geckodriver (Firefox WebDriver)
+
 RUN GECKODRIVER_VERSION=v0.30.0 \
     && wget https://github.com/mozilla/geckodriver/releases/download/${GECKODRIVER_VERSION}/geckodriver-${GECKODRIVER_VERSION}-linux64.tar.gz \
     && tar -xvzf geckodriver-${GECKODRIVER_VERSION}-linux64.tar.gz \
@@ -18,7 +17,7 @@ WORKDIR /app
 
 COPY requirements.txt .
 
-# Create output folder and set permissions
+
 RUN mkdir -p /app/output_folder && chmod -R 777 /app/output_folder
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
 RUN pip install uvicorn

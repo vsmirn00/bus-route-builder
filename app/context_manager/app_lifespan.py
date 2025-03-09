@@ -1,6 +1,8 @@
 from contextlib import asynccontextmanager
-from fastapi import FastAPI # type: ignore
-from loguru import logger # type: ignore
+from fastapi import FastAPI 
+from loguru import logger 
+
+interactive_maps = {}
  
 @asynccontextmanager
 async def lifespan(app: FastAPI):
