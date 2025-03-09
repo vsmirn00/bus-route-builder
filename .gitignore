@@ -6,3 +6,4 @@ cache/
 data/
 **/*.pyc
 *.pyc
+results/
