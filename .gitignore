@@ -12,3 +12,5 @@ results/
 
 *cpython*
 output_folder/
+
+*.ipynb
