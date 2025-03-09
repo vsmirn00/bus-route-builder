@@ -17,3 +17,6 @@ data
 
 *.xlsx
 *.ipynb
+
+
+**__pycache__**
