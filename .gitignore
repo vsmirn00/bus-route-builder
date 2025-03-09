@@ -18,5 +18,5 @@ data
 *.xlsx
 *.ipynb
 
-
+commands.txt
 **__pycache__**
