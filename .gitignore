@@ -7,3 +7,7 @@ data/
 **/*.pyc
 *.pyc
 results/
+
+./output_folder
+
+*cpython*

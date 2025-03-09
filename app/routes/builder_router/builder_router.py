@@ -18,7 +18,7 @@ async def build_route(request: RouteRequest) -> RouteResponse:
     response, maps = model.predict(request)
 
     logger.info(f"Obtained the map for {request.name}")
-    map_creator(input_map=maps, name=request)
+    map_creator(input_map=maps, request=request)
     interactive_maps["map"] = maps
     return response
    

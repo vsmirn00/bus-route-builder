@@ -52,6 +52,6 @@ def map_creator(input_map: folium.Map, request):
 
     img_data = input_map._to_png(1) 
     img = Image.open(io.BytesIO(img_data))
-    img.save(f'{request.output_dir}{request.name}_bus_map.png')
+    img.save(f'{request.output_path}{request.name}_bus_map.png')
 
     logging.info(f"Map saved for {request.name} with adjusted bounds.")
