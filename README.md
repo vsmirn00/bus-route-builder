@@ -2,7 +2,7 @@
 
 ## 📌 Introduction
 
-This project **automates the creation of optimized bus routes** for any city. It serves as a **heuristic-based solution** that finds the **best possible K routes for a given number of N routes**, using a **Hierarchical Clustering Algorithm**.
+This project **automates the creation of optimized bus routes** for any city. It serves as a **heuristic-based solution** that finds the **best possible K routes for a given number of N stations**, using a **Hierarchical Clustering Algorithm**.
 
 The application includes the following key features:
 - **Automated Route Generation** – Finds the best K routes based on city infrastructure.
