@@ -1,31 +1,135 @@
+# 🚍 Bus Route Optimization Service
 
+## 📌 Introduction
 
-# Bus Route optimization
+This project **automates the creation of optimized bus routes** for any city. It serves as a **heuristic-based solution** that finds the **best possible K routes for a given number of N routes**, using a **Hierarchical Clustering Algorithm**.
 
-### Introduction
+The application includes the following key features:
+- **Automated Route Generation** – Finds the best K routes based on city infrastructure.
+- **Central Bus Station Integration** – Optionally generates a **central hub** for bus routes.
+- **Balanced Route Optimization** – Ensures an **even distribution of bus stops per route**.
+- **Flexible Input Handling** – Users can specify parameters **or let the app optimize automatically**.
+- **Multiple Deployment Options** – Supports **FastAPI**, **Docker**, and **Kubernetes** deployment.
+- **Interactive Route Visualization** – Generates an **interactive map** with **route visualizations**.
 
-The following project aims to automate the creation of bus routes in any city. It is meant to used as an heuristic to find the best possible K routes for a given number of N routes. It is implemented using Hierarchical Clustering Algorithm and has the option of creating a central bus station, balance the number of bus stops per route, find the best number of k-routes or arbitrary choose the best number os stations. In case of not giving a choosen value for each one of the expecting by the app inputs, the internal logic of the application will handle the process. Essentially, this means that we will obtain an automated response. The expected input is a json request containing all the details to communicate with the app. This demo is meant to be a basic version of how to solve a generalizable problem, so we already handled the data processing manually and stored the input file in a csv file called equipaments_model_2.csv. For the purpose of this demonstration, we require to use it as the input file, although in future iterations we mighht create an endpoint capable of handling file loading per se.
+For demonstration purposes, the input data is **preprocessed and stored** in a CSV file (`equipaments_model_2.csv`). Future iterations will include an endpoint for **direct file uploads**.
 
-The app takes around 8 minutes to run and it saves a screenshot of the entire map and returns a json response with the characteristics of each route. For both simplicity and practicability, we used both approaches: deploying the model simply by using FastaAPI, and deploying the service on Kubernetes. The later task expects more time to run but it is the closest assessment of how the application would run as a real-time service. Having said that we can go over the setup and requirements. 
+The **app execution takes approximately 8 minutes** and saves a **screenshot of the generated routes** while returning a **JSON response** detailing route characteristics.
 
-Finally, we automated the entire launch of the app using the script.sh file in the scriptps folder. The execution of this bash file automates the containerization of the service and starts the application. To execute this script it is necessary to launch Docker. The script executes all the necessary commands for the application to start, so once it is operational, the only remaining task is to send the json request to get the output map.
+Deployment options include:
+- **FastAPI** – Quickest and easiest way to test the app locally.
+- **Docker** – Containerized deployment for a **stable and reproducible environment**.
+- **Kubernetes (K8s)** – For **scalable and production-ready service deployment**.
 
-
-### Dependencies
-
-First, we created this project using poetry. So for anyone who would like to use this service it is recommended to install poetry and create a virtual environment. Also for the use of K8s it is necessary to have Docker installed and the required dependencies associated to it. The requirements.txt file has been extracted from the poetry.toml file which has all the dependencies.
-
-
-
-uvicorn app.main:app --reload
+For automation, we provide a **`script.sh`** file that **builds and launches the service** with a single command.
 
 ---
 
+## 📂 Repository Structure
 
+```
+bus-route-builder/
+│── app/
+│   ├── main.py           # FastAPI app entry point
+│   ├── routes            # API endpoints
+│   ├── factory           # Handles application execution
+│   ├── context_manager   # Handles application's lifespan
+│   ├── utils             # Helper functions
+│   ├── models            # Has the Adapter model to handle the app logic
+│   ├── http_model        # Stores the json schemas
+│   ├── output_folder     # Stores the output maps
+│   ├── src               # Handles the optimization logic
+│   └── data/
+│       ├── equipaments_model_2.csv  # Input dataset
+│
+│── deployment/
+│   ├── deployment.yaml      # Kubernetes Deployment config
+│   ├── service.yaml         # Kubernetes Service config
+│
+│── scripts/
+│   ├── script.sh            # Automates deployment process
+│
+│── Dockerfile               # Docker container setup
+│── docker-compose.yml        # Docker Compose configuration
+│── requirements.txt          # Python dependencies
+│── README.md                # Documentation
+```
 
+---
 
-# Request
+## 🛠 Dependencies & Installation
 
+This project uses **Poetry** for dependency management. It is recommended to:
+1. **Install Poetry** → [Installation Guide](https://python-poetry.org/docs/)
+2. **Create a Virtual Environment**
+3. **Ensure Docker & Kubernetes are installed** for containerized deployment.
+
+**Clone the repository and navigate to the project directory:**
+```sh
+git clone https://github.com/vsmirn00/bus-route-builder.git
+cd bus-route-builder
+```
+
+**Install dependencies using Poetry:**
+```sh
+poetry install
+```
+
+---
+
+## 🚀 How to Run the Application
+
+### 1️⃣ Running with FastAPI (Local Development)
+The easiest way to test the app locally:
+```sh
+fastapi dev
+```
+Then open **http://127.0.0.1:8000/docs** to test the API.
+
+---
+
+### 2️⃣ Running with Docker
+To run the app inside a Docker container:
+```sh
+docker-compose build
+docker-compose up --build
+```
+This ensures a **stable and portable environment**.
+
+---
+
+### 3️⃣ Running on Kubernetes
+To deploy the service on **Minikube**, update the **Docker username** and run:
+```sh
+minikube start
+
+docker build -t username/fastapi-app:01 .
+docker push username/fastapi-app:01
+
+kubectl apply -f deployment/deployment.yaml
+kubectl apply -f deployment/service.yaml
+
+minikube service fast-api-service
+```
+This simulates **real-world cloud deployment**.
+
+---
+
+### 4️⃣ Automating Deployment with the Bash Script
+For full automation, use the provided **`script.sh`**:
+```sh
+chmod +x scripts/script.sh
+bash scripts/script.sh
+```
+This script **builds, deploys, and launches the service** in a single step.
+
+---
+
+## 📡 API Usage
+
+### 📥 JSON Request Format
+#### 🔹 FastAPI Request
+```json
 {
   "name": "viladecans",
   "input_path": "data/equipaments_model_2.csv",
@@ -35,20 +139,9 @@ uvicorn app.main:app --reload
   "central_station": true,
   "balance_stations": true
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```
+#### 🔹 Request for Docker/Kubernetes Deployment
+```json
 {
   "name": "viladecans",
   "input_path": "app/data/equipaments_model_2.csv",
@@ -58,74 +151,59 @@ uvicorn app.main:app --reload
   "central_station": true,
   "balance_stations": true
 }
+```
 
+---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Request in fastapi
-
+### 📤 Expected API Response
+```json
 {
-  "name": "Viladecans",
-  "num_stops": 13,
-  "path": "data/russia_cities.geojson"
+  "name": "viladecans",
+  "input_path": "data/equipaments_model.csv",
+  "output_path": "output_folder/image.jpg",
+  "num_stations": 30,
+  "num_routes": 3,
+  "central_station": true,
+  "balanced_num_stops": true,
+  "results": [
+    {
+      "route_id": 2,
+      "route_num_stations": 3,
+      "distance": 10.23
+    }
+  ]
 }
-
-
----
-
-# Docker commands
-
-docker-compose build
-docker-compose up --build
+```
+✔ The API **returns a JSON response** summarizing the computed routes.  
+✔ A **map screenshot** is saved in the output folder.  
 
 ---
 
+## 📍 Interactive Map
+The `/map` endpoint generates an **interactive folium map** showing all bus routes.
 
-### Kubernetes (CLI workflow)
+After starting the app, visit:
+```
+http://127.0.0.1:8000/map
+```
+This helps visualize **the optimized routes in real-time**.
 
-minikube start
+---
 
-docker build -t vsmirn/fastapi-app:01 .
+## 🌍 Future Improvements
+- **Automated File Uploads** – Replace CSV input with dynamic file uploads.
+- **Real-Time Route Optimization** – Improve algorithm efficiency for large cities.
+- **Cloud Deployment (AWS/GCP)** – Scale the service for production use.
+- **Parallelize application logic** – Parallelize every possible step.
 
-docker push vsmirn/fastapi-app:01
+---
 
-kubectl apply -f deployment/deployment.yaml
+## 📜 License
+This project is licensed under the **MIT License** – feel free to use and modify it.
 
-kubectl apply -f deployment/service.yaml
+---
 
-minikube service fast-api-service
-
-
-### sh file
-
-chmod +x scripts/script.sh
-bash scripts/script.sh
-
-
-
-### Kubernetes (No longer relevant)
-
-minikube start --extra-config=apiserver.authorization-mode=RBA
-
-# minikube start --memory=4096 --cpus=2 --addons=default-storageclass --addons=storage-provisioner 
-# docker build -t vsmirn/fastapi-app:01 .
-# minikube image load logistics/fastapi-app:01
-
-kubectl create secret docker-registry regcred \
-    --docker-server=https://index.docker.io/v1/ \
-    --docker-username=<your-docker-username> \
-    --docker-password=<your-docker-password> \
-    --docker-email=<your-email>
-
+## 🙌 Contributors
+🚀 **Developed by:**
+- **Vladimir Smirnov** – AI Engineer & Data Scientist
 
