@@ -1,4 +1,6 @@
 /tmp
 commands.txt
 streamlit_app/
+tsr/
+cache/
 data/

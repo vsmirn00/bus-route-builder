@@ -4,6 +4,50 @@ uvicorn app.main:app --reload
 
 ---
 
+
+
+
+# Request
+
+{
+  "name": "viladecans",
+  "input_path": "data/equipaments_model_2.csv",
+  "output_path": "output_folder/",
+  "num_stations": 0,
+  "num_routes": 0,
+  "central_station": true,
+  "balance_stations": true
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Request in fastapi
 
 {

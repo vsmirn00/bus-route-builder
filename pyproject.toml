@@ -22,6 +22,10 @@ loguru = "^0.7.3"
 uvicorn = "^0.34.0"
 streamlit = "^1.41.1"
 streamlit-folium = "^0.24.0"
+seaborn = "^0.13.2"
+ortools = "^9.11.4210"
+osmnx = "^2.0.1"
+pyproj = "^3.7.1"
 
 
 [tool.poetry.group.dev.dependencies]
