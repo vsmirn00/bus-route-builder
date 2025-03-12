@@ -379,4 +379,10 @@ class ModelHandler(AbstractBaseClass):
         optimized_maps = [self.map_wrapper(self.k_df_list[i], optimized_routes[i], self.soft_colors[i]) for i in range(len(self.k_df_list))]
         logger.info("Finished map_wrapper")
 
+        
+        logger.info("Store each of the dfs in the target folder")
+        for df in self.k_df_list:
+            route_id = df["route_id"].iloc[-1]
+            df.to_csv(f"{request.output_path}/route_{route_id}.csv", index=False)
+
         return optimized_routes, optimized_maps
